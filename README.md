@@ -1,6 +1,8 @@
 # About
 Code to create group-averaged functional connectivity map.
 
+details coming...
+
 <br>
 
 # Recommended citation

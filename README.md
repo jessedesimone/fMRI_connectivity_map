@@ -1,5 +1,5 @@
 # About
-Publicly available research resources from Human Brain Mapping paper examining default mode network connectivity adaptations following repetitive head impact exposure in youth football.
+Publicly available code from Human Brain Mapping paper examining default mode network connectivity adaptations following repetitive head impact exposure in youth football.
 
 <br>
 

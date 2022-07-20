@@ -1,0 +1,42 @@
+#!/bin/bash
+
+'''
+Creates group averaged connectivity mask for a given seed location
+'''
+
+
+module load afni/v18.3.03
+
+loc=`pwd`
+top=/project/radiology/ANSIR_lab/shared/s192794_workspace/Experiment_work/HL_conn
+Zdir_pre=$top/Processed_pre/RSC/YTC
+Zdir_post=$top/Processed_post/RSC/YTC
+template_dir=$top/Templates
+seed_dir=$top/Seeds
+SEED=`cat $seed_dir/seed_list`
+mask_file=HOatlas_no_cereb_2mm_mask.nii
+
+for seed in ${SEED[@]}
+do
+  echo "+++++"
+  echo "creating network mask for $seed"
+  echo "+++++"
+
+  output_dir=$template_dir/${seed}_mask_create
+  mkdir -p $output_dir
+
+  # Create average Z-pearson maps
+  3dMean -prefix $output_dir/step1_3dMean_${seed}_Z_pre $Zdir_pre/Z_pearson_*.${seed}*
+  3dMean -prefix $output_dir/step1_3dMean_${seed}_Z_post $Zdir_post/Z_pearson_*.${seed}*
+
+  # Retain only positive voxel correlations thresholded at p=0.05
+  3dcalc -a $output_dir/step1_3dMean_${seed}_Z_pre+tlrc -prefix $output_dir/step2_3dcalc_${seed}_posZ_pre -expr 'ispositive(a-0.2044)'
+  3dcalc -a $output_dir/step1_3dMean_${seed}_Z_post+tlrc -prefix $output_dir/step2_3dcalc_${seed}_posZ_post -expr 'ispositive(a-0.2044)'
+
+  # Concatenate pre and post positive z-score maps
+  3dcalc -a $output_dir/step2_3dcalc_${seed}_posZ_pre+tlrc -b $output_dir/step2_3dcalc_${seed}_posZ_post+tlrc -prefix $output_dir/step3_3dcalc_${seed}_posZ_concat -expr 'step(a+b)'
+
+  # Remove WM and cerebellar voxels using a predefined mask (using Harvard-oxford here without cerebellum)
+  3dcalc -a $output_dir/step3_3dcalc_${seed}_posZ_concat+tlrc -b $template_dir/$mask_file -prefix $template_dir/${seed}_ntwk -expr 'step(a*b)'
+
+done

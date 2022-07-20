@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# Steps prior to running script
-# 1. copy errts.${sub}.anaticor+tlrc file for each sub to $data_dir/$grp
-# 2. use 3dAutomask to mask template brain; place in $loc/Templates
-# 3. resample template brain to epi resolution; place in $loc/Templates
+'''
+Script to run seed correlation
+'''
 
 loc=`pwd`
 data_dir=#<path/to/data/dir>
@@ -15,14 +14,16 @@ seed_dir=$loc/Seeds
 SEED=`cat $seed_dir/seed_list`
 
 cd $data_dir
-Group=(test)
+#Group=(test_group)
+Group=`cat $data_dir/id_group`
 
 for grp in ${Group[@]}
 do
 	mkdir -p $dest_dir/$grp
 
 	cd $data_dir/$grp
-	SUBJECTS=(subj2)
+	#SUBJECTS=(subj2)
+	SUBJECTS=`cat $data_dir/$grp/id_sub`
 
 	for sub in ${SUBJECTS[@]}
 	do

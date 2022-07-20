@@ -5,6 +5,7 @@
 
 Script to create seed- or ROI-based functional connectivity mask
 
+
 Required files:
 >error time series output from afni_proc.py processing [errts.${sub}.anaticor+tlrc] - copy all input files to $data_dir
 >seed locations or ROIs in standard template space

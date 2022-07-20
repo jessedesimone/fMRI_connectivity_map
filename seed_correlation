@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Steps prior to running script
+# 1. copy errts.${sub}.anaticor+tlrc file for each sub to $data_dir/$grp
+# 2. use 3dAutomask to mask template brain; place in $loc/Templates
+# 3. resample template brain to epi resolution; place in $loc/Templates
+
+loc=`pwd`
+data_dir=#<path/to/data/dir>
+dest_dir=$data_dir/#<path/to/output/dir>
+mkdir -p $dest_dir
+task=RS
+
+seed_dir=$loc/Seeds
+SEED=`cat $seed_dir/seed_list`
+
+cd $data_dir
+Group=(test)
+
+for grp in ${Group[@]}
+do
+	mkdir -p $dest_dir/$grp
+
+	cd $data_dir/$grp
+	SUBJECTS=(subj2)
+
+	for sub in ${SUBJECTS[@]}
+	do
+
+		for seed in ${SEED[@]}
+		do
+			echo "Processing seed: $seed for $sub"
+			in_file=errts.${sub}.anaticor+tlrc
+
+			if [ -e ${in_file}.HEAD ]; then
+				echo "Input file $in_file exists"
+
+				# Remove old files
+				if [ -e res_${seed}_${task}_${sub} ]; then
+					rm res_${seed}_${task}_${sub}
+				fi
+				if [ -e ${sub}.${seed}_${task}.1D ]; then
+					rm ${sub}.${seed}_${task}.1D
+				fi
+				if [ -e pearson_${sub}.${seed}_${task} ]; then
+					rm pearson_${sub}.${seed}_${task}
+				fi
+				if [ -e $dest_dir/${grp}/Z_pearson_${sub}.${seed}_${task} ]; then
+					rm $dest_dir/${grp}/Z_pearson_${sub}.${seed}_${task}
+				fi
+
+				#resample the ROI to the input file resolution
+				3dresample -master ${in_file} -rmode NN -prefix res_${seed}_${task}_${sub} -inset ${seed_dir}/${seed}.nii
+
+				#create ROI stats 1D file of input file with seed as mask
+				3dROIstats -quiet -mask_f2short -mask res_${seed}_${task}_${sub}+tlrc ${in_file} > ${sub}.${seed}_${task}.1D
+
+				#create pearson correlation map
+				3dTcorr1D -pearson -mask $loc/Templates/MNI_mask_res.nii.gz -prefix pearson_${sub}.${seed}_${task} ${in_file} ${sub}.${seed}_${task}.1D
+
+				#fisher r-to-z transform pearson correlation map
+				3dcalc -a pearson_${sub}.${seed}_${task}+tlrc. -expr 'atanh(a)' -prefix $dest_dir/${grp}/Z_pearson_${sub}.${seed}_${task}
+
+			else
+				echo "Input file does not exist"
+			fi
+		done
+	done
+done

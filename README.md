@@ -1,7 +1,12 @@
 # About
-Code to create group-averaged functional connectivity map.
+Group-averaged functional connectivity map in AFNI.
 
-details coming...
+Pre-process data using standard pipeline in AFNI (i.e., afni_proc.py).
+
+
+Required:
+1. error time series (errts dataset) using ANATICOR method or another method from afni_proc.py
+2. seed location mask(s)
 
 <br>
 

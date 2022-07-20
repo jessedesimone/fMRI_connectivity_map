@@ -3,8 +3,7 @@ Group-averaged functional connectivity map in AFNI.
 
 Change Log
 ==========
-0.0.1 (2022/07/20)
-Version updates
+0.0.1 (2022/07/20)<br/>version updates
 ------------------
 20220720 initial commit
 

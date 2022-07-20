@@ -23,5 +23,13 @@ Required input files:
 Output files:
 network connectivity mask
 
+# Steps
+Preprocessing
+create error time series file using afni_proc.py
+
+Regions-of-interest
+ROIs to calculate pearson correlations with time-series
+
+
 # Recommended citation
 DeSimone JC et al (2021). Mapping default mode connectivity alterations following a single season of subconcussive impact exposure in youth football. Human Brain Mapping. 42(8).

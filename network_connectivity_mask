@@ -1,0 +1,65 @@
+#!/bin/bash
+
+'''
+(C) Jesse DeSimone, Ph.D. 2022
+
+Script to create seed- or ROI-based functional connectivity mask
+
+Required files:
+>error time series output from afni_proc.py processing [errts.${sub}.anaticor+tlrc] - copy all input files to $data_dir
+>seed locations or ROIs in standard template space
+>text list of seed locations
+>binary mask of standard template brain space
+>id_group text file defining each group
+>id_sub text files defining subjects in each group
+
+Change Log
+==========
+
+0.0.1 (2022/07/20)
+Version updates
+------------------
+20220720 initial commit
+'''
+
+#define directories
+loc=`pwd`
+data_dir=$loc/path/to/data_dir
+out_dir=$loc/path/to/out_dir
+mkdir -p $output_dir
+seed_dir=$loc/path/to/seed_dir
+
+#define conditions
+TASK=(resting1 resting2)
+SEED=`cat $seed_dir/seed_list`
+
+#seed or ROI correlation step using 3dTcorr1D
+'''
+Compute the correlation coefficient between each voxel time series
+in the input 3D+time dataset 'xset' and each column in the 1D time
+series file 'y1D', and stores the output values in a new dataset.
+'''
+cd $data_dir
+#Group=(test_group)
+GROUP=`cat $data_dir/id_group`
+
+for grp in ${GROUP[@]}
+do
+  mkdir -p $out_dir/$grp
+
+  cd $data_dir/$grp
+  #SUBJECTS=(subj2)
+	SUBJECTS=`cat $data_dir/$grp/id_sub`
+
+  for sub in ${SUBJECTS[@]}
+  do
+
+    for seed in ${SEED[@]}
+    do
+
+
+
+
+    done    #seed
+  done    #sub
+done    #grp

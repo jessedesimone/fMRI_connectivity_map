@@ -33,7 +33,7 @@ do
   3dcalc -a $output_dir/step1_3dMean_${seed}_Z_pre+tlrc -prefix $output_dir/step2_3dcalc_${seed}_posZ_pre -expr 'ispositive(a-0.2044)'
   3dcalc -a $output_dir/step1_3dMean_${seed}_Z_post+tlrc -prefix $output_dir/step2_3dcalc_${seed}_posZ_post -expr 'ispositive(a-0.2044)'
 
-  # Concatenate pre and post positive z-score maps
+  '''Optional - Concatenate connectivity maps from multiple scans''' 
   3dcalc -a $output_dir/step2_3dcalc_${seed}_posZ_pre+tlrc -b $output_dir/step2_3dcalc_${seed}_posZ_post+tlrc -prefix $output_dir/step3_3dcalc_${seed}_posZ_concat -expr 'step(a+b)'
 
   # Remove WM and cerebellar voxels using a predefined mask (using Harvard-oxford here without cerebellum)

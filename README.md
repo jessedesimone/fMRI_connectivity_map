@@ -5,8 +5,8 @@ Change Log
 ==========
 0.0.1
 ------------------
-Version Updates:
-20220720 initial commit
+Version Updates: <br/>
+20220720 initial commit <br/>
 
 
 Pre-process data using standard pipeline afni_proc.py pipeline. The error time series file [errts.${sub}.anaticor+tlrc] will be the input file for the seed correlation step.

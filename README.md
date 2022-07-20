@@ -1,6 +1,14 @@
 # About
 Group-averaged functional connectivity map in AFNI.
 
+Change Log
+==========
+0.0.1 (2022/07/20)
+Version updates
+------------------
+20220720 initial commit
+
+
 Pre-process data using standard pipeline afni_proc.py pipeline. The error time series file [errts.${sub}.anaticor+tlrc] will be the input file for the seed correlation step.
 The seed location or atlas-based region-of-interest should be in the same space as the standard template used in the afni_proc.py step.
 

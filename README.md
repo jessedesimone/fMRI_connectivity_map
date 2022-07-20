@@ -7,18 +7,23 @@ Script will create group-averaged functional connectivity masks for pre-defined 
 Preprocessing:
 Standard pre-processing using afni_proc.py. Required input file is error time series (e.g., errts.s01.anaticor+tlrc).
 
-Files:
-data
+Input data:
+Create directory called 'data'. Copy errts file for each subject to data directory.
 
-Atlas:
-1 - default mode network
-2 - right frontoparietal network
-3 - left frontoparietal network
-4 - primary visual network
-5 - secondary visual network
-6 - sensorimotor network
-7 - salience network
-8 - dorsal attention network
+Regions-of-interest:
+
+
+
+
+Output network connectivity masks:
+1 - default mode network (dmn)
+2 - right frontoparietal network (rfpn)
+3 - left frontoparietal network (lfpn)
+4 - primary visual network (pvn)
+5 - secondary visual network (svn)
+6 - sensorimotor network (smn)
+7 - salience network (sal)
+8 - dorsal attention network (dan)
 
 Change Log
 ==========

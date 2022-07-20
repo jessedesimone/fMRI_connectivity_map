@@ -13,13 +13,6 @@ Required files:
 >id_group text file defining each group
 >id_sub text files defining subjects in each group
 
-Change Log
-==========
-
-0.0.1 (2022/07/20)
-Version updates
-------------------
-20220720 initial commit
 '''
 
 #define directories

@@ -8,22 +8,17 @@ Preprocessing:
 Standard pre-processing using afni_proc.py. Required input file is error time series (e.g., errts.s01.anaticor+tlrc).
 
 Input data:
-Create directory called 'data'. Copy errts file for each subject to data directory.
+Replace files in 'data' directory with errts+tlrc file for each subject in the analysis.
 
 Regions-of-interest:
+Code should work with any pre-drawn seed or region-of-interest; just update the seeds directory with a binary mask file of the ROI in .nii format and update the seed_list text file;
+Create regions of interest in same space as the standard template used in the registration/warping step during afni_proc.py preprocessing;
+posterior cingulate seed for default mode network contained in seeds directory
 
 
 
 
-Output network connectivity masks:
-1 - default mode network (dmn)
-2 - right frontoparietal network (rfpn)
-3 - left frontoparietal network (lfpn)
-4 - primary visual network (pvn)
-5 - secondary visual network (svn)
-6 - sensorimotor network (smn)
-7 - salience network (sal)
-8 - dorsal attention network (dan)
+
 
 Change Log
 ==========

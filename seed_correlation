@@ -2,6 +2,9 @@
 
 '''
 Script to run seed correlation
+
+resamples sees to resolution of input image
+performs 3dROIstats
 '''
 
 loc=`pwd`

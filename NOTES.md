@@ -4,7 +4,7 @@ use driver script to call all other scripts
 script 1 = seed_correlation
 script 2 = network_connectivity_mask
 
-need to create a log file for each time it creates a new network mask.
+need to create a log file for each time driver is run
 
 
 

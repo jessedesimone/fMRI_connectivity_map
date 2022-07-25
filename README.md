@@ -16,7 +16,7 @@ When creating new ROIs, the best option is to draw the ROIs in the same image sp
 Create subject list using the following command: touch subj_list.txt. Then, add each subject name to subj_list.txt. Note: do not enter the entire file name; just add the unique identifier for each subject (i.e., s01, s02 ... s0n).
 
 4. Run driver.sh
-Terminal should be in bash environment. Run the following command: ./driver.sh. If getting an error "permission denied: ./driver.sh"; try "chmod +x driver.sh"; then run command again. 
+Terminal should be in bash environment. Run the following command: "./driver.sh. If getting an error "permission denied: ./driver.sh"; try "chmod +x driver.sh"; then run command again. 
 
 
 
